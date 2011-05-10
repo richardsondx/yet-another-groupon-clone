@@ -1,0 +1,48 @@
+%div.grid_8
+  %div.featured
+    %h3
+      Featured deal
+    %p
+      %b Name:
+      = @featured.name
+    %p
+      %b Ends in:
+      - secs = @featured.finish - Time.now
+      = (secs / (3600*24)).floor.to_s + " days "
+      = (secs % (3600*24) / 3600).floor.to_s + "h"
+      = (secs % 3600 / 60).floor.to_s + "\'"
+      = (secs % 60).floor.to_s + "\""
+    %p
+      %b Price:
+      = @featured.price
+    %p
+      %b More about this deal:
+      = @featured.description
+    %p
+      %b Deal by:
+      %a{:href => @featured.partner.url, :target => '_blank'}
+        = @featured.partner.name
+    %p
+      %a{:href => take_deal_path(@featured.id)} Take it!
+- @additional.each do |deal|
+  %div.grid_4 
+    %div.additional
+      %h3
+        Other deals
+      %p
+        %b Name:
+        = deal.name
+      %p
+        %b End:
+        = deal.finish
+      %p
+        %b Price:
+        = deal.price
+      %p
+        %b Description:
+        = deal.description
+      %p
+        %b Partner:
+        %a{:href => deal.partner.url, :target => '_blank'}
+          = deal.partner.name
+%div.clear

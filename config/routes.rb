@@ -1,4 +1,17 @@
 Groupon::Application.routes.draw do
+  devise_for :users
+
+  resources :users
+
+  resources :partners
+
+  resources :deals do
+    get 'showcase', :on => :collection
+    get 'none', :on => :collection
+    get 'take', :on => :member
+    get 'taken', :on => :member
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,7 +61,7 @@ Groupon::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => "welcome#index"
+  root :to => "deals#showcase"
 
   # See how all your routes lay out with "rake routes"
 

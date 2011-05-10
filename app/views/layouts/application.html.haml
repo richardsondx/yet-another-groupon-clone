@@ -1,0 +1,23 @@
+!!!
+%html
+  %head
+    %title Groupon
+    = stylesheet_link_tag :all
+    = javascript_include_tag :defaults
+    = csrf_meta_tag
+  %body
+    %div.container.container_12
+      %div.container_12.header
+        - if user_signed_in?
+          = link_to "My account", user_path(current_user)
+          | 
+          = link_to "Sign out", destroy_user_session_path
+        - else
+          = link_to "Sign in", new_user_session_path
+      %h2.grid_12
+        Yet another groupon clone
+      %div.clear
+      = yield
+      %div.grid_12.footer
+        &nbsp;
+      %div.clear

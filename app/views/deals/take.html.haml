@@ -1,0 +1,29 @@
+%div.grid_2
+  &nbsp;
+%div.grid_8
+  %h3 You're about to make a great deal!
+  %p
+    %b Name:
+    = @deal.name
+  %p
+    %b Ends in:
+    - secs = @deal.finish - Time.now
+    = (secs / (3600*24)).floor.to_s + " days "
+    = (secs % (3600*24) / 3600).floor.to_s + "h"
+    = (secs % 3600 / 60).floor.to_s + "\'"
+    = (secs % 60).floor.to_s + "\""
+  %p
+    %b Price:
+    = @deal.price
+  %p
+    %b More about this deal:
+    = @deal.description
+  %p
+    %b Deal from:
+    %a{:href => @deal.partner.url, :target => '_blank'}
+      = @deal.partner.name
+  %p
+    %a{:href => taken_deal_path(@deal.id)} Sure, give it to me!
+%div.grid_2
+  &nbsp;
+%div.clear
